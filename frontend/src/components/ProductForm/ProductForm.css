@@ -1,0 +1,150 @@
+.product-form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.product-form-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-form-card h2 {
+    font-size: 1.4rem;
+    color: #2d6a4f;
+    margin-bottom: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.form-group input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2d6a4f;
+}
+
+.batch-section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.batch-section h3 {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.batch-inputs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.batch-inputs input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.btn-add-batch {
+    padding: 0.5rem 1rem;
+    background-color: #457b9d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-add-batch:hover {
+    background-color: #1d3557;
+}
+
+.batch-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+}
+
+.batch-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    background: #f4f6f8;
+    border-radius: 4px;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.btn-remove-batch {
+    background: none;
+    border: none;
+    color: #e63946;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.btn-cancel {
+    padding: 0.6rem 1.25rem;
+    background: #e0e0e0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-cancel:hover {
+    background: #bdbdbd;
+}
+
+.btn-submit {
+    padding: 0.6rem 1.25rem;
+    background-color: #2d6a4f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.btn-submit:hover {
+    background-color: #1b4332;
+}

@@ -1,0 +1,76 @@
+.expiry-dashboard {
+    padding: 1.5rem;
+}
+
+.expiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.expiry-header h2 {
+    font-size: 1.5rem;
+    color: #2d6a4f;
+}
+
+.expiry-header select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.expiry-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.expiry-table th,
+.expiry-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.expiry-table th {
+    background-color: #f4f6f8;
+    font-weight: 600;
+    color: #333;
+}
+
+.row-expired {
+    background-color: #fff0f0;
+}
+
+.row-expired:hover {
+    background-color: #ffe0e0;
+}
+
+.row-today {
+    background-color: #fff4e5;
+}
+
+.row-today:hover {
+    background-color: #ffe8cc;
+}
+
+.row-soon {
+    background-color: #fffde7;
+}
+
+.row-soon:hover {
+    background-color: #fff9c4;
+}
+
+.no-expiry {
+    color: #2d6a4f;
+    font-size: 1rem;
+    padding: 1rem 0;
+}
+
+.loading {
+    color: #666;
+    padding: 1rem 0;
+}
