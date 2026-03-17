@@ -2,6 +2,22 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './ProductForm.css';
 
+const CATEGORIES = [
+    'Produce',
+    'Fruits',
+    'Dairy',
+    'Bakery',
+    'Pasta & Grains',
+    'Frozen Foods',
+    'Snacks',
+    'Chocolates & Candy',
+    'Beverages',
+    'Breakfast',
+    'Canned & Packaged Foods',
+    'Toiletries & Personal Care',
+    'Cleaning Supplies',
+];
+
 const emptyForm = {
     name: '',
     category: '',
@@ -58,7 +74,12 @@ const ProductForm = ({ onSubmit, onCancel, initial }) => {
                     </div>
                     <div className="form-group">
                         <label>Category</label>
-                        <input name="category" value={form.category} onChange={handleChange} required />
+                        <select name="category" value={form.category} onChange={handleChange} required>
+                            <option value="">Select a category</option>
+                            {CATEGORIES.map((c) => (
+                                <option key={c} value={c}>{c}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label>Shelf Location</label>
