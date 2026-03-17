@@ -87,7 +87,7 @@ const Dashboard = ({ user, onLogout }) => {
           />
         )}
         {activeTab === 'expiry' && (
-          <ExpiryDashboard products={products} loading={pLoading} user={user} />
+          <ExpiryDashboard products={products} loading={pLoading} user={user} onProductsUpdate={fetchProducts} />
         )}
         {activeTab === 'waste' && (
           <WasteReportList
