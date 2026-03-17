@@ -78,9 +78,55 @@
   background-color: #c1121f;
 }
 
-.loading,
-.no-reports {
-  color: #666;
-  font-size: 0.95rem;
-  padding: 1rem 0;
+.waste-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
 }
+
+.waste-filters input {
+  flex: 1;
+  max-width: 360px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.waste-filters input:focus {
+  border-color: #2d6a4f;
+  background: #fff;
+}
+
+.waste-filters select {
+  padding: 0.6rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #f9fafb;
+  outline: none;
+  cursor: pointer;
+}
+
+.subtext {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin: 0.15rem 0 0;
+}
+
+/* Reason badges */
+.reason-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.reason-expired  { background: #fee2e2; color: #dc2626; }
+.reason-damaged  { background: #fef3c7; color: #d97706; }
+.reason-other    { background: #f1f5f9; color: #64748b; }
