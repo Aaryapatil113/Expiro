@@ -1,4 +1,4 @@
-const BASE_URL = '/api/waste-reports';
+const BASE_URL = `${import.meta.env.VITE_API_URL || ''}/api/waste-reports`;
 
 export const getWasteReports = async () => {
   const res = await fetch(BASE_URL);
