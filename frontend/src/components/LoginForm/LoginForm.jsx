@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ShieldCheck, UserRound } from 'lucide-react';
+import { login } from '../../services/authAPI.js';
 import './LoginForm.css';
 
 const LoginForm = ({ onLogin }) => {
@@ -9,19 +10,20 @@ const LoginForm = ({ onLogin }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!role) { setError('Please select a role'); return; }
         if (!username || !password) { setError('Please fill in all fields'); return; }
-        if (role === 'manager' && (username !== 'admin' || password !== 'admin')) {
-            setError('Invalid manager credentials');
-            return;
+        try {
+            const user = await login(username, password);
+            if (user.role !== role) {
+                setError(`Invalid credentials for ${role} role`);
+                return;
+            }
+            onLogin(user);
+        } catch (err) {
+            setError(err.message);
         }
-        if (role === 'employee' && username.trim() === '') {
-            setError('Please enter a username');
-            return;
-        }
-        onLogin({ username, role });
     };
 
     return (
