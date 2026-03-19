@@ -13,63 +13,85 @@ const LoginForm = ({ onLogin }) => {
         e.preventDefault();
         if (!role) { setError('Please select a role'); return; }
         if (!username || !password) { setError('Please fill in all fields'); return; }
+        if (role === 'manager' && (username !== 'admin' || password !== 'admin')) {
+            setError('Invalid manager credentials');
+            return;
+        }
+        if (role === 'employee' && username.trim() === '') {
+            setError('Please enter a username');
+            return;
+        }
         onLogin({ username, role });
     };
 
     return (
         <div className="login-page">
-            <div className="login-banner">
-                <h1>Expiro</h1>
-                <p>STORE INVENTORY AND EXPIRY TRACKER</p>
-            </div>
-            <div className="login-body">
-                <div className="login-card">
-                    <h2>User Login</h2>
+            <div className="bubble" />
+            <div className="login-card">
 
-                    {/* Role Selection */}
-                    <div className="role-selector">
-                        <div
-                            className={`role-card ${role === 'manager' ? 'active' : ''}`}
-                            onClick={() => { setRole('manager'); setError(''); }}
-                        >
-                            <ShieldCheck size={32} strokeWidth={1.5} className="role-icon" />
-                            <span className="role-title">Manager</span>
-                            <span className="role-sub">Admin access</span>
+                {/* Left green branding panel */}
+                <div className="login-left">
+                    <div className="login-left-content">
+                        <div className="login-brand">
+                            <div className="brand-dot">E</div>
+                            <h1>Expiro</h1>
                         </div>
-                        <div
-                            className={`role-card ${role === 'employee' ? 'active' : ''}`}
-                            onClick={() => { setRole('employee'); setError(''); }}
-                        >
-                            <UserRound size={32} strokeWidth={1.5} className="role-icon" />
-                            <span className="role-title">Employee</span>
-                            <span className="role-sub">Staff access</span>
+                        <h2>Welcome</h2>
+                        <p>Select your role to get started.</p>
+
+                        <div className="role-selector">
+                            <div
+                                className={`role-card ${role === 'manager' ? 'active' : ''}`}
+                                onClick={() => { setRole('manager'); setError(''); }}
+                            >
+                                <ShieldCheck size={20} strokeWidth={1.5} />
+                                <div>
+                                    <p className="role-title">Manager</p>
+                                    <p className="role-sub">Admin access</p>
+                                </div>
+                            </div>
+                            <div
+                                className={`role-card ${role === 'employee' ? 'active' : ''}`}
+                                onClick={() => { setRole('employee'); setError(''); }}
+                            >
+                                <UserRound size={20} strokeWidth={1.5} />
+                                <div>
+                                    <p className="role-title">Employee</p>
+                                    <p className="role-sub">Staff access</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    {error && <p className="login-error">{error}</p>}
+                {/* Right white login panel */}
+                <div className="login-right">
+                    <div className="login-form-wrap">
+                        <h2>Welcome</h2>
+                        <p className="login-sub">Login to your account to continue</p>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="input-group">
+                        {error && <p className="login-error">{error}</p>}
+
+                        <form onSubmit={handleSubmit}>
                             <input
+                                className="login-input"
                                 type="text"
                                 placeholder="Username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
-                            <span className="input-icon">👤</span>
-                        </div>
-                        <div className="input-group">
                             <input
+                                className="login-input"
                                 type="password"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <span className="input-icon">🔒</span>
-                        </div>
-                        <button type="submit" className="login-btn">LOGIN</button>
-                    </form>
+                            <button type="submit" className="login-btn">LOG IN</button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
     );

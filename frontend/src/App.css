@@ -1,7 +1,7 @@
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -9,27 +9,11 @@ body {
     Ubuntu, Cantarell, sans-serif;
     background-color: #f4f6f8;
     color: #333;
+    line-height: 1.5;
 }
 
-.app {
-    min-height: 100vh;
-}
-
-a {
-    color: #2d6a4f;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-button {
-    font-family: inherit;
-}
-
-input,
-select,
-textarea {
-    font-family: inherit;
-}
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; font-size: 1rem; }
+a { color: #2d6a4f; text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul { list-style: none; }
