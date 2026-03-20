@@ -2,8 +2,6 @@
 
 **Authors:** Aarya Patil & Kanad Motiwale
 
-**Class:** [CS5610 Web Development — Northeastern University](ADD_YOUR_CLASS_URL_HERE)
-
 ---
 
 ## Project Objective
