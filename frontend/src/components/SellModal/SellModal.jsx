@@ -41,14 +41,21 @@ const SellModal = ({ product, onConfirm, onCancel }) => {
               min="1"
               max={totalRemaining}
               value={quantity}
-              onChange={(e) => { setQuantity(e.target.value); setError(''); }}
+              onChange={(e) => {
+                setQuantity(e.target.value);
+                setError('');
+              }}
               placeholder="Enter quantity sold"
               autoFocus
             />
           </div>
           <div className="sell-actions">
-            <button type="button" onClick={onCancel} className="btn-cancel">Cancel</button>
-            <button type="submit" className="btn-confirm">Confirm Sale</button>
+            <button type="button" onClick={onCancel} className="btn-cancel">
+              Cancel
+            </button>
+            <button type="submit" className="btn-confirm">
+              Confirm Sale
+            </button>
           </div>
         </form>
       </div>

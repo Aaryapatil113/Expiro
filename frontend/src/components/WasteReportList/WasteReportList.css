@@ -127,6 +127,15 @@
   text-transform: capitalize;
 }
 
-.reason-expired  { background: #fee2e2; color: #dc2626; }
-.reason-damaged  { background: #fef3c7; color: #d97706; }
-.reason-other    { background: #f1f5f9; color: #64748b; }
+.reason-expired {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.reason-damaged {
+  background: #fef3c7;
+  color: #d97706;
+}
+.reason-other {
+  background: #f1f5f9;
+  color: #64748b;
+}

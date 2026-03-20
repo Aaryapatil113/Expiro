@@ -14,7 +14,7 @@
   border-radius: 14px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .sell-card h2 {
@@ -70,7 +70,7 @@
 
 .sell-input-group input:focus {
   border-color: #2d6a4f;
-  box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
 }
 
 .sell-actions {
@@ -90,7 +90,9 @@
   font-weight: 500;
 }
 
-.btn-cancel:hover { background: #e2e8f0; }
+.btn-cancel:hover {
+  background: #e2e8f0;
+}
 
 .btn-confirm {
   padding: 0.6rem 1.25rem;
@@ -103,4 +105,6 @@
   font-weight: 600;
 }
 
-.btn-confirm:hover { background: #1b4332; }
+.btn-confirm:hover {
+  background: #1b4332;
+}

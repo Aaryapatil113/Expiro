@@ -1,4 +1,4 @@
-import wasteReportService from '../services/wasteReportService.js';
+import wasteReportService from "../services/wasteReportService.js";
 
 const getAll = async (req, res, next) => {
   try {
@@ -20,7 +20,9 @@ const getById = async (req, res, next) => {
 
 const getByProduct = async (req, res, next) => {
   try {
-    const reports = await wasteReportService.getReportsByProduct(req.params.productId);
+    const reports = await wasteReportService.getReportsByProduct(
+      req.params.productId,
+    );
     res.json(reports);
   } catch (err) {
     next(err);
@@ -38,7 +40,10 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const result = await wasteReportService.updateReport(req.params.id, req.body);
+    const result = await wasteReportService.updateReport(
+      req.params.id,
+      req.body,
+    );
     res.json(result);
   } catch (err) {
     next(err);

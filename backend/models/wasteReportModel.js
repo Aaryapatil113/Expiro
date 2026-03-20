@@ -1,7 +1,7 @@
-import { ObjectId } from 'mongodb';
-import { getDB } from '../config/db.js';
+import { ObjectId } from "mongodb";
+import { getDB } from "../config/db.js";
 
-const COLLECTION = 'waste_reports';
+const COLLECTION = "waste_reports";
 
 const findAll = async () => {
   return await getDB().collection(COLLECTION).find().toArray();
@@ -36,4 +36,11 @@ const deleteOne = async (id) => {
     .deleteOne({ _id: new ObjectId(id) });
 };
 
-export default { findAll, findById, findByProduct, insertOne, updateOne, deleteOne };
+export default {
+  findAll,
+  findById,
+  findByProduct,
+  insertOne,
+  updateOne,
+  deleteOne,
+};

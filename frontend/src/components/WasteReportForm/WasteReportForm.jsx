@@ -46,10 +46,16 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product</label>
-            <select value={form.productId} onChange={handleProductSelect} required>
+            <select
+              value={form.productId}
+              onChange={handleProductSelect}
+              required
+            >
               <option value="">Select a product</option>
               {products.map((p) => (
-                <option key={p._id} value={p._id}>{p.name}</option>
+                <option key={p._id} value={p._id}>
+                  {p.name}
+                </option>
               ))}
             </select>
           </div>
@@ -92,8 +98,12 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
             />
           </div>
           <div className="form-actions">
-            <button type="button" onClick={onCancel} className="btn-cancel">Cancel</button>
-            <button type="submit" className="btn-submit">{initial ? 'Update' : 'Submit'}</button>
+            <button type="button" onClick={onCancel} className="btn-cancel">
+              Cancel
+            </button>
+            <button type="submit" className="btn-submit">
+              {initial ? 'Update' : 'Submit'}
+            </button>
           </div>
         </form>
       </div>

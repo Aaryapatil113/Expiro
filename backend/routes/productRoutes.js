@@ -1,14 +1,14 @@
-import { Router } from 'express';
-import productController from '../controllers/productController.js';
+import { Router } from "express";
+import productController from "../controllers/productController.js";
 
 const router = Router();
 
-router.post('/sell', productController.sell);
-router.get('/expiring/:days', productController.getExpiring);
-router.get('/', productController.getAll);
-router.get('/:id', productController.getById);
-router.post('/', productController.create);
-router.put('/:id', productController.update);
-router.delete('/:id', productController.remove);
+router.post("/sell", productController.sell);
+router.get("/expiring/:days", productController.getExpiring);
+router.get("/", productController.getAll);
+router.get("/:id", productController.getById);
+router.post("/", productController.create);
+router.put("/:id", productController.update);
+router.delete("/:id", productController.remove);
 
 export default router;

@@ -9,7 +9,8 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
   const filtered = [...reports]
     .sort((a, b) => new Date(b.reportedAt) - new Date(a.reportedAt))
     .filter((r) => {
-      const matchSearch = r.productName.toLowerCase().includes(search.toLowerCase()) ||
+      const matchSearch =
+        r.productName.toLowerCase().includes(search.toLowerCase()) ||
         r.reportedBy.toLowerCase().includes(search.toLowerCase());
       const matchReason = filterReason ? r.reason === filterReason : true;
       return matchSearch && matchReason;
@@ -22,9 +23,13 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
       <div className="waste-report-header">
         <div>
           <h2>Waste Reports</h2>
-          <p className="subtext">{filtered.length} records — sorted by most recent</p>
+          <p className="subtext">
+            {filtered.length} records — sorted by most recent
+          </p>
         </div>
-        <button className="btn-add" onClick={onAdd}>+ Log Waste</button>
+        <button className="btn-add" onClick={onAdd}>
+          + Log Waste
+        </button>
       </div>
 
       <div className="waste-filters">
@@ -34,7 +39,10 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <select value={filterReason} onChange={(e) => setFilterReason(e.target.value)}>
+        <select
+          value={filterReason}
+          onChange={(e) => setFilterReason(e.target.value)}
+        >
           <option value="">All Reasons</option>
           <option value="expired">Expired</option>
           <option value="damaged">Damaged</option>
@@ -69,8 +77,15 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
                 <td>{r.reportedBy}</td>
                 <td>{new Date(r.reportedAt).toLocaleDateString()}</td>
                 <td>
-                  <button className="btn-edit" onClick={() => onEdit(r)}>Edit</button>
-                  <button className="btn-delete" onClick={() => onDelete(r._id)}>Delete</button>
+                  <button className="btn-edit" onClick={() => onEdit(r)}>
+                    Edit
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => onDelete(r._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
