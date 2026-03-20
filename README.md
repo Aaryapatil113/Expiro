@@ -1,11 +1,12 @@
 # Expiro
 
 **Authors:** Aarya Patil & Kanad Motiwale
-**Class:** [CS5610 Web Development — Northeastern University](#)
+
+**Class:** [CS5610 Web Development — Northeastern University](ADD_YOUR_CLASS_URL_HERE)
 
 ---
 
-## What is this?
+## Project Objective
 
 Expiro is a store inventory and expiry tracker built for grocery store staff. Managers can monitor stock health, track expiring products, and review waste over time. Employees get a daily view of what needs to come off the shelf and can log waste reports on the spot.
 
@@ -15,25 +16,12 @@ The app is role-based. Managers and employees see different views and have diffe
 
 ## Screenshots
 
-### Manager Dashboard
-![Manager Dashboard](./Screenshots/WD%20Expiro%20Thumbnail%201.png)
-
-### Employee View
-![Employee View](./Screenshots/WD%20Expiro%20Thumbnail%202.png)
+![WD Expiro Thumbnail 1](./Screenshots/WD%20Expiro%20Thumbnail%201.png)
+![WD Expiro Thumbnail 2](./Screenshots/WD%20Expiro%20Thumbnail%202.png)
 
 ---
 
-## Tech Stack
-
-- **Frontend:** React 18 with Hooks, Vite
-- **Backend:** Node.js, Express
-- **Database:** MongoDB Atlas (native driver, no Mongoose)
-- **Auth:** Passport.js (local strategy)
-- **Deployment:** Render (backend), Vercel (frontend)
-
----
-
-## Getting Started
+## Instructions to Build
 
 ### Prerequisites
 
