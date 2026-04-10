@@ -33,13 +33,21 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
       </div>
 
       <div className="waste-filters">
+        <label htmlFor="waste-search" className="sr-only">
+          Search by product or employee
+        </label>
         <input
+          id="waste-search"
           type="text"
           placeholder="Search by product or employee..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <label htmlFor="waste-reason-filter" className="sr-only">
+          Filter by reason
+        </label>
         <select
+          id="waste-reason-filter"
           value={filterReason}
           onChange={(e) => setFilterReason(e.target.value)}
         >
@@ -51,17 +59,19 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="no-reports">No waste reports found.</p>
+        <p className="no-reports" role="status">
+          No waste reports found.
+        </p>
       ) : (
-        <table className="waste-table">
+        <table className="waste-table" aria-label="Waste reports">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Qty Removed</th>
-              <th>Reason</th>
-              <th>Reported By</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th scope="col">Product</th>
+              <th scope="col">Qty Removed</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Reported By</th>
+              <th scope="col">Date</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -77,12 +87,17 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
                 <td>{r.reportedBy}</td>
                 <td>{new Date(r.reportedAt).toLocaleDateString()}</td>
                 <td>
-                  <button className="btn-edit" onClick={() => onEdit(r)}>
+                  <button
+                    className="btn-edit"
+                    onClick={() => onEdit(r)}
+                    aria-label={`Edit waste report for ${r.productName}`}
+                  >
                     Edit
                   </button>
                   <button
                     className="btn-delete"
                     onClick={() => onDelete(r._id)}
+                    aria-label={`Delete waste report for ${r.productName}`}
                   >
                     Delete
                   </button>
