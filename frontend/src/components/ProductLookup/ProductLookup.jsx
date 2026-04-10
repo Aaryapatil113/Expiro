@@ -97,9 +97,13 @@ const ProductLookup = ({ products, loading }) => {
         </div>
       </div>
 
-      {/* Search bar — always visible */}
+      {/* Search bar */}
       <div className="lookup-search">
+        <label htmlFor="lookup-search-input" className="sr-only">
+          Search by product name or shelf location
+        </label>
         <input
+          id="lookup-search-input"
           type="text"
           placeholder="Search by product name or shelf location..."
           value={search}
@@ -110,7 +114,7 @@ const ProductLookup = ({ products, loading }) => {
         />
       </div>
 
-      {/* Category Grid — show when no search and no category selected */}
+      {/* Category Grid */}
       {!isSearching ? (
         <div className="category-grid">
           {categories.map((cat) => {
@@ -122,40 +126,45 @@ const ProductLookup = ({ products, loading }) => {
             const Icon = config.icon;
             const count = products.filter((p) => p.category === cat).length;
             return (
-              <div
+              <button
+                type="button"
                 key={cat}
                 className="cat-card"
                 onClick={() => setSelectedCategory(cat)}
+                aria-label={`${cat}, ${count} products`}
               >
                 <div
                   className="cat-icon-wrap"
                   style={{ backgroundColor: config.bg }}
+                  aria-hidden="true"
                 >
                   <Icon size={28} color={config.color} strokeWidth={1.75} />
                 </div>
                 <p className="cat-name">{cat}</p>
                 <p className="cat-count">{count} products</p>
-              </div>
+              </button>
             );
           })}
         </div>
-      ) : /* Product Table */
-      filtered.length === 0 ? (
-        <div className="lookup-empty">
+      ) : filtered.length === 0 ? (
+        <div className="lookup-empty" role="status">
           <p>
-            No products found for "<strong>{search || selectedCategory}</strong>
-            "
+            No products found for{' '}
+            <strong>{search || selectedCategory}</strong>
           </p>
         </div>
       ) : (
-        <table className="lookup-table">
+        <table
+          className="lookup-table"
+          aria-label="Product lookup results"
+        >
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Category</th>
-              <th>Shelf Location</th>
-              <th>Stock Status</th>
-              <th>Units Available</th>
+              <th scope="col">Product</th>
+              <th scope="col">Category</th>
+              <th scope="col">Shelf Location</th>
+              <th scope="col">Stock Status</th>
+              <th scope="col">Units Available</th>
             </tr>
           </thead>
           <tbody>
@@ -172,10 +181,10 @@ const ProductLookup = ({ products, loading }) => {
                   <td>
                     <span className={`stock-status stock-${status}`}>
                       {status === 'out'
-                        ? '✕ Out of Stock'
+                        ? 'Out of Stock'
                         : status === 'low'
-                          ? '⚠ Low Stock'
-                          : '✓ In Stock'}
+                          ? 'Low Stock'
+                          : 'In Stock'}
                     </span>
                   </td>
                   <td>{stock} units</td>
