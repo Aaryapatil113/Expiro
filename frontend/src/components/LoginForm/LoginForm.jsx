@@ -121,6 +121,20 @@ const LoginForm = ({ onLogin }) => {
                 : 'Login to your account to continue'}
             </p>
 
+            {role === 'manager' && mode === 'signin' && (
+              <div className="login-hint">
+                <p><strong>Demo credentials:</strong></p>
+                <p>Username: <code>admin</code></p>
+                <p>Password: <code>admin</code></p>
+              </div>
+            )}
+
+            {role === 'employee' && mode === 'signin' && (
+              <div className="login-hint">
+                <p>Don't have an account? Switch to <strong>Sign Up</strong> to register.</p>
+              </div>
+            )}
+
             {/* Sign In / Sign Up toggle — employees only */}
             {role === 'employee' && (
               <div className="auth-toggle" role="group" aria-label="Authentication mode">
