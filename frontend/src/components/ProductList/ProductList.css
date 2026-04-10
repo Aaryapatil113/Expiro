@@ -247,3 +247,10 @@
   font-size: 0.95rem;
   padding: 1.5rem 0;
 }
+
+/* Category card as button — reset default button styles */
+.cat-card {
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  text-align: center;
+}

@@ -46,13 +46,22 @@ const CategoryCard = ({ name, count, onClick }) => {
   const Icon = config.icon;
 
   return (
-    <div className="cat-card" onClick={onClick}>
-      <div className="cat-icon-wrap" style={{ backgroundColor: config.bg }}>
+    <button
+      type="button"
+      className="cat-card"
+      onClick={onClick}
+      aria-label={`${name}, ${count} products`}
+    >
+      <div
+        className="cat-icon-wrap"
+        style={{ backgroundColor: config.bg }}
+        aria-hidden="true"
+      >
         <Icon size={28} color={config.color} strokeWidth={1.75} />
       </div>
       <p className="cat-name">{name}</p>
       <p className="cat-count">{count} products</p>
-    </div>
+    </button>
   );
 };
 
@@ -129,7 +138,11 @@ const ProductList = ({ products, loading, onEdit, onDelete, onAdd }) => {
             </button>
           </div>
           <div className="product-filters">
+            <label htmlFor="product-search" className="sr-only">
+              Search products in {selectedCategory}
+            </label>
             <input
+              id="product-search"
               type="text"
               placeholder={`Search in ${selectedCategory}...`}
               value={search}
@@ -139,14 +152,17 @@ const ProductList = ({ products, loading, onEdit, onDelete, onAdd }) => {
           {filteredProducts.length === 0 ? (
             <p className="no-products">No products found.</p>
           ) : (
-            <table className="product-table">
+            <table
+              className="product-table"
+              aria-label={`Products in ${selectedCategory}`}
+            >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Brand</th>
-                  <th>Shelf Location</th>
-                  <th>Stock</th>
-                  <th>Actions</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Shelf Location</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -163,12 +179,17 @@ const ProductList = ({ products, loading, onEdit, onDelete, onAdd }) => {
                       </span>
                     </td>
                     <td>
-                      <button className="btn-edit" onClick={() => onEdit(p)}>
+                      <button
+                        className="btn-edit"
+                        onClick={() => onEdit(p)}
+                        aria-label={`Edit ${p.name}`}
+                      >
                         Edit
                       </button>
                       <button
                         className="btn-delete"
                         onClick={() => onDelete(p._id)}
+                        aria-label={`Delete ${p.name}`}
                       >
                         Delete
                       </button>
