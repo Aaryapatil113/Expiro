@@ -1,0 +1,36 @@
+:root {
+  /* Brand */
+  --color-primary: #2d6a4f;
+  --color-primary-dark: #1b4332;
+  --color-primary-light: #d8f3dc;
+
+  /* Approve / confirm / save / add */
+  --color-approve: #2d6a4f;
+  --color-approve-hover: #1b4332;
+  --color-approve-text: #ffffff;
+
+  /* Cancel / back / neutral */
+  --color-cancel-bg: #f3f4f6;
+  --color-cancel-hover: #e5e7eb;
+  --color-cancel-text: #374151;
+  --color-cancel-border: #e5e7eb;
+
+  /* Destructive / delete / waste */
+  --color-destructive: #e11d48;
+  --color-destructive-bg: #fff1f2;
+  --color-destructive-hover: #ffe4e6;
+  --color-destructive-border: #fecdd3;
+
+  /* Edit / secondary action */
+  --color-edit: #2563eb;
+  --color-edit-bg: #eff6ff;
+  --color-edit-hover: #dbeafe;
+  --color-edit-border: #bfdbfe;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+}
