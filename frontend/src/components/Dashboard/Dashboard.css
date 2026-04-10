@@ -111,3 +111,30 @@
     padding: 0.6rem 0.75rem;
   }
 }
+
+/* Skip link — visible on focus for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: #2d6a4f;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Logo font */
+.dashboard-logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
