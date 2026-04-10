@@ -53,29 +53,30 @@
 
 .btn-edit {
   padding: 0.3rem 0.75rem;
-  background-color: #457b9d;
-  color: white;
-  border: none;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
   border-radius: 4px;
   cursor: pointer;
   margin-right: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
-
 .btn-edit:hover {
-  background-color: #1d3557;
+  background-color: #dbeafe;
 }
-
 .btn-delete {
   padding: 0.3rem 0.75rem;
-  background-color: #e63946;
-  color: white;
-  border: none;
+  background-color: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
-
 .btn-delete:hover {
-  background-color: #c1121f;
+  background-color: #ffe4e6;
 }
 
 .waste-filters {
