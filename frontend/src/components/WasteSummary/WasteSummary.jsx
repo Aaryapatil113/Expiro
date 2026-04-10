@@ -17,7 +17,9 @@ const WasteSummary = ({ reports, loading }) => {
 
   const sorted = Object.values(summary)
     .sort((a, b) => b.totalRemoved - a.totalRemoved)
-    .filter((s) => s.productName.toLowerCase().includes(search.toLowerCase()));
+    .filter((s) =>
+      s.productName.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
     <div className="waste-summary">
@@ -29,24 +31,35 @@ const WasteSummary = ({ reports, loading }) => {
           </p>
         </div>
       </div>
+
       <div className="waste-summary-filters">
+        <label htmlFor="summary-search" className="sr-only">
+          Search by product name
+        </label>
         <input
+          id="summary-search"
           type="text"
           placeholder="Search by product name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+
       {sorted.length === 0 ? (
-        <p className="no-data">No results found.</p>
+        <p className="no-data" role="status">
+          No results found.
+        </p>
       ) : (
         <div className="summary-table-wrapper">
-          <table className="summary-table">
+          <table
+            className="summary-table"
+            aria-label="Waste summary by product"
+          >
             <thead>
               <tr>
-                <th>Product</th>
-                <th>Total Qty Removed</th>
-                <th>No. of Reports</th>
+                <th scope="col">Product</th>
+                <th scope="col">Total Qty Removed</th>
+                <th scope="col">No. of Reports</th>
               </tr>
             </thead>
             <tbody>
