@@ -128,7 +128,6 @@ const ExpiryDashboard = ({
     return matchFilter && matchCategory && matchRisk && matchSearch;
   });
 
-  // Group by product
   const grouped = filtered.reduce((acc, item) => {
     if (!acc[item.productName]) acc[item.productName] = [];
     acc[item.productName].push(item);
@@ -186,7 +185,7 @@ const ExpiryDashboard = ({
               border: `1px solid ${cfg.color}40`,
             }}
           >
-            <span className="status-dot" style={{ background: cfg.dot }} />
+            <span className="status-dot" style={{ background: cfg.dot }} aria-hidden="true" />
             {cfg.label}
           </span>
         </td>
@@ -212,10 +211,20 @@ const ExpiryDashboard = ({
         </td>
         <td>
           <div className="action-btns">
-            <button className="btn-sell" onClick={() => setSellTarget(b)}>
+            <button
+              type="button"
+              className="btn-sell"
+              onClick={() => setSellTarget(b)}
+              aria-label={`Log sale for ${b.productName}`}
+            >
               Log Sale
             </button>
-            <button className="btn-waste" onClick={() => onLogWaste(b)}>
+            <button
+              type="button"
+              className="btn-waste"
+              onClick={() => onLogWaste(b)}
+              aria-label={`Log waste for ${b.productName}`}
+            >
               Waste
             </button>
           </div>
@@ -226,76 +235,98 @@ const ExpiryDashboard = ({
 
   return (
     <div className="expiry-dashboard">
+
       {/* Welcome Banner */}
       <div className="expiry-banner">
         <div>
           <h2>
-            {greeting()}, {user?.username} 👋
+            {greeting()}, {user?.username}
+            <span aria-hidden="true"> 👋</span>
           </h2>
           <p>{today}</p>
         </div>
         {counts.expired + counts.today > 0 && (
-          <div className="banner-alert" onClick={() => setFilter('expired')}>
-            ⚠️ {counts.expired + counts.today} items need attention → View
-            Critical
-          </div>
+          <button
+            type="button"
+            className="banner-alert"
+            onClick={() => setFilter('expired')}
+            aria-label={`${counts.expired + counts.today} items need attention, click to view critical items`}
+          >
+            <span aria-hidden="true">⚠️</span>
+            {' '}{counts.expired + counts.today} items need attention → View Critical
+          </button>
         )}
       </div>
 
       {/* Summary Cards */}
       <div className="expiry-summary-cards">
-        <div
+        <button
+          type="button"
           className="summary-card expired"
           onClick={() => setFilter(filter === 'expired' ? 'all' : 'expired')}
+          aria-pressed={filter === 'expired'}
         >
           <span className="summary-count">{counts.expired}</span>
           <span className="summary-label">Expired</span>
           <span className="summary-hint">Discard immediately</span>
-        </div>
-        <div
+        </button>
+        <button
+          type="button"
           className="summary-card today"
           onClick={() => setFilter(filter === 'today' ? 'all' : 'today')}
+          aria-pressed={filter === 'today'}
         >
           <span className="summary-count">{counts.today}</span>
           <span className="summary-label">Expiring Today</span>
           <span className="summary-hint">Prioritize sale</span>
-        </div>
-        <div
+        </button>
+        <button
+          type="button"
           className="summary-card soon"
           onClick={() => setFilter(filter === 'soon' ? 'all' : 'soon')}
+          aria-pressed={filter === 'soon'}
         >
           <span className="summary-count">{counts.soon}</span>
           <span className="summary-label">Expiring in 3 Days</span>
           <span className="summary-hint">Monitor closely</span>
-        </div>
+        </button>
       </div>
 
       {/* Filters */}
       <div className="expiry-filters">
+        <label htmlFor="expiry-search" className="sr-only">Search products</label>
         <input
+          id="expiry-search"
           type="text"
           placeholder="Search by product or category..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <label htmlFor="expiry-filter" className="sr-only">Filter by status</label>
+        <select
+          id="expiry-filter"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
           <option value="all">All Alerts</option>
           <option value="expired">Expired</option>
           <option value="today">Expiring Today</option>
           <option value="soon">Expiring in 3 Days</option>
         </select>
+        <label htmlFor="category-filter" className="sr-only">Filter by category</label>
         <select
+          id="category-filter"
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
           <option value="">All Categories</option>
           {categories.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
+            <option key={c} value={c}>{c}</option>
           ))}
         </select>
+        <label htmlFor="risk-filter" className="sr-only">Filter by risk level</label>
         <select
+          id="risk-filter"
           value={riskFilter}
           onChange={(e) => setRiskFilter(e.target.value)}
         >
@@ -315,26 +346,28 @@ const ExpiryDashboard = ({
         </label>
       </div>
 
-      {sellError && <p className="sell-error-banner">{sellError}</p>}
+      {sellError && (
+        <p className="sell-error-banner" role="alert">{sellError}</p>
+      )}
 
       {/* Table */}
       {filtered.length === 0 ? (
-        <div className="no-expiry">
-          🎉 No expiring products match your filter!
+        <div className="no-expiry" role="status">
+          <span aria-hidden="true">🎉</span> No expiring products match your filter!
         </div>
       ) : (
-        <table className="expiry-table">
+        <table className="expiry-table" aria-label="Products expiring soon">
           <thead>
             <tr>
-              <th>Status</th>
-              <th>Product</th>
-              <th>Category</th>
-              <th>Shelf</th>
-              <th>Qty</th>
-              <th>Time Left</th>
-              <th>Waste Risk</th>
-              <th>Recommended Action</th>
-              <th>Actions</th>
+              <th scope="col">Status</th>
+              <th scope="col">Product</th>
+              <th scope="col">Category</th>
+              <th scope="col">Shelf</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Time Left</th>
+              <th scope="col">Waste Risk</th>
+              <th scope="col">Recommended Action</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -343,7 +376,8 @@ const ExpiryDashboard = ({
                   <>
                     <tr key={`group-${name}`} className="group-header-row">
                       <td colSpan={9}>
-                        <span className="group-label">📦 {name}</span>
+                        <span className="group-label" aria-hidden="true">📦</span>
+                        <span className="group-label"> {name}</span>
                         <span className="group-meta">
                           {batches.length} batch{batches.length > 1 ? 'es' : ''}{' '}
                           · Total qty:{' '}
