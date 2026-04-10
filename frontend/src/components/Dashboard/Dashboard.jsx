@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProductList from '../ProductList/ProductList.jsx';
 import ProductForm from '../ProductForm/ProductForm.jsx';
@@ -28,6 +28,7 @@ const Dashboard = ({ user, onLogout }) => {
     removeProduct,
     fetchProducts,
   } = useProducts();
+
   const {
     reports,
     loading: wLoading,
@@ -35,6 +36,20 @@ const Dashboard = ({ user, onLogout }) => {
     editReport,
     removeReport,
   } = useWasteReports();
+
+  // Escape key to close any open modal
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        setShowProductForm(false);
+        setShowWasteForm(false);
+        setEditingProduct(null);
+        setEditingReport(null);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, []);
 
   const handleProductSubmit = async (data) => {
     if (editingProduct) {
@@ -86,31 +101,40 @@ const Dashboard = ({ user, onLogout }) => {
 
   return (
     <div className="dashboard">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       <header className="dashboard-header">
         <h1 className="dashboard-logo">Expiro</h1>
         <div className="dashboard-user">
           <span>
             {user.username} ({user.role})
           </span>
-          <button className="btn-logout" onClick={onLogout}>
+          <button
+            className="btn-logout"
+            onClick={onLogout}
+            aria-label="Log out of Expiro"
+          >
             Logout
           </button>
         </div>
       </header>
 
-      <nav className="dashboard-nav">
+      <nav className="dashboard-nav" aria-label="Main navigation">
         {tabs.map((t) => (
           <button
             key={t.key}
             className={`nav-tab ${activeTab === t.key ? 'active' : ''}`}
             onClick={() => setActiveTab(t.key)}
+            aria-current={activeTab === t.key ? 'page' : undefined}
           >
             {t.label}
           </button>
         ))}
       </nav>
 
-      <main className="dashboard-content">
+      <main className="dashboard-content" id="main-content">
         {activeTab === 'products' && user.role === 'manager' && (
           <ProductList
             products={products}

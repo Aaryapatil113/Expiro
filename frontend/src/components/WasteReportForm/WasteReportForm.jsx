@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './WasteReportForm.css';
 
@@ -13,10 +13,48 @@ const emptyForm = {
 
 const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
   const [form, setForm] = useState(emptyForm);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     if (initial) setForm(initial);
   }, [initial]);
+
+  // Focus trap
+  useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal) return;
+    const focusable = modal.querySelectorAll(
+      'button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first?.focus();
+    const trap = (e) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    modal.addEventListener('keydown', trap);
+    return () => modal.removeEventListener('keydown', trap);
+  }, []);
+
+  // Escape key to close
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onCancel();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [onCancel]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,13 +78,22 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
   };
 
   return (
-    <div className="waste-form-overlay">
-      <div className="waste-form-card">
-        <h2>{initial ? 'Edit Waste Report' : 'Log Waste Report'}</h2>
-        <form onSubmit={handleSubmit}>
+    <div
+      className="waste-form-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="waste-form-title"
+    >
+      <div className="waste-form-card" ref={modalRef}>
+        <h2 id="waste-form-title">
+          {initial ? 'Edit Waste Report' : 'Log Waste Report'}
+        </h2>
+        <form onSubmit={handleSubmit} noValidate>
+
           <div className="form-group">
-            <label>Product</label>
+            <label htmlFor="waste-product">Product</label>
             <select
+              id="waste-product"
               value={form.productId}
               onChange={handleProductSelect}
               required
@@ -59,9 +106,11 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
               ))}
             </select>
           </div>
+
           <div className="form-group">
-            <label>Quantity Removed</label>
+            <label htmlFor="waste-quantity">Quantity Removed</label>
             <input
+              id="waste-quantity"
               name="quantityRemoved"
               type="number"
               value={form.quantityRemoved}
@@ -70,33 +119,45 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
               required
             />
           </div>
+
           <div className="form-group">
-            <label>Reason</label>
-            <select name="reason" value={form.reason} onChange={handleChange}>
+            <label htmlFor="waste-reason">Reason</label>
+            <select
+              id="waste-reason"
+              name="reason"
+              value={form.reason}
+              onChange={handleChange}
+            >
               <option value="expired">Expired</option>
               <option value="damaged">Damaged</option>
               <option value="other">Other</option>
             </select>
           </div>
+
           <div className="form-group">
-            <label>Reported By</label>
+            <label htmlFor="waste-reported-by">Reported By</label>
             <input
+              id="waste-reported-by"
               name="reportedBy"
               value={form.reportedBy}
               onChange={handleChange}
               placeholder="Your name"
               required
+              autoComplete="name"
             />
           </div>
+
           <div className="form-group">
-            <label>Notes</label>
+            <label htmlFor="waste-notes">Notes</label>
             <input
+              id="waste-notes"
               name="notes"
               value={form.notes}
               onChange={handleChange}
               placeholder="Optional notes"
             />
           </div>
+
           <div className="form-actions">
             <button type="button" onClick={onCancel} className="btn-cancel">
               Cancel
@@ -105,6 +166,7 @@ const WasteReportForm = ({ onSubmit, onCancel, initial, products }) => {
               {initial ? 'Update' : 'Submit'}
             </button>
           </div>
+
         </form>
       </div>
     </div>
