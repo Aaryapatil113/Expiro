@@ -6,7 +6,7 @@ import './LoginForm.css';
 
 const LoginForm = ({ onLogin }) => {
   const [role, setRole] = useState(null);
-  const [mode, setMode] = useState('signin'); // 'signin' | 'signup'
+  const [mode, setMode] = useState('signin');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,10 +23,8 @@ const LoginForm = ({ onLogin }) => {
       setError('Please fill in all fields');
       return;
     }
-
     setLoading(true);
     setError('');
-
     try {
       if (role === 'manager') {
         const user = await login(username, password);
@@ -71,45 +69,50 @@ const LoginForm = ({ onLogin }) => {
 
   return (
     <div className="login-page">
-      <div className="bubble" />
+      <div className="bubble" aria-hidden="true" />
       <div className="login-card">
+
         {/* Left green panel */}
         <div className="login-left">
           <div className="login-left-content">
             <div className="login-brand">
-              <div className="brand-dot">E</div>
+              <div className="brand-dot" aria-hidden="true">E</div>
               <h1>Expiro</h1>
             </div>
             <h2>Welcome</h2>
             <p>Select your role to get started.</p>
-            <div className="role-selector">
-              <div
+            <div className="role-selector" role="group" aria-label="Select your role">
+              <button
+                type="button"
                 className={`role-card ${role === 'manager' ? 'active' : ''}`}
                 onClick={() => handleRoleSelect('manager')}
+                aria-pressed={role === 'manager'}
               >
-                <ShieldCheck size={20} strokeWidth={1.5} />
+                <ShieldCheck size={20} strokeWidth={1.5} aria-hidden="true" />
                 <div>
                   <p className="role-title">Manager</p>
                   <p className="role-sub">Admin access</p>
                 </div>
-              </div>
-              <div
+              </button>
+              <button
+                type="button"
                 className={`role-card ${role === 'employee' ? 'active' : ''}`}
                 onClick={() => handleRoleSelect('employee')}
+                aria-pressed={role === 'employee'}
               >
-                <UserRound size={20} strokeWidth={1.5} />
+                <UserRound size={20} strokeWidth={1.5} aria-hidden="true" />
                 <div>
                   <p className="role-title">Employee</p>
                   <p className="role-sub">Staff access</p>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
 
         {/* Right white panel */}
         <div className="login-right">
-          <div className="login-right-decoration" />
+          <div className="login-right-decoration" aria-hidden="true" />
           <div className="login-form-wrap">
             <h2>{mode === 'signup' ? 'Create Account' : 'Welcome'}</h2>
             <p className="login-sub">
@@ -120,57 +123,80 @@ const LoginForm = ({ onLogin }) => {
 
             {/* Sign In / Sign Up toggle — employees only */}
             {role === 'employee' && (
-              <div className="auth-toggle">
+              <div className="auth-toggle" role="group" aria-label="Authentication mode">
                 <button
                   className={`toggle-btn ${mode === 'signin' ? 'active' : ''}`}
-                  onClick={() => {
-                    setMode('signin');
-                    setError('');
-                  }}
+                  onClick={() => { setMode('signin'); setError(''); }}
                   type="button"
+                  aria-pressed={mode === 'signin'}
                 >
                   Sign In
                 </button>
                 <button
                   className={`toggle-btn ${mode === 'signup' ? 'active' : ''}`}
-                  onClick={() => {
-                    setMode('signup');
-                    setError('');
-                  }}
+                  onClick={() => { setMode('signup'); setError(''); }}
                   type="button"
+                  aria-pressed={mode === 'signup'}
                 >
                   Sign Up
                 </button>
               </div>
             )}
 
-            {error && <p className="login-error">{error}</p>}
+            {error && (
+              <p className="login-error" role="alert">
+                {error}
+              </p>
+            )}
 
-            <form onSubmit={handleSubmit}>
-              <input
-                className="login-input"
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                className="login-input"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {mode === 'signup' && role === 'employee' && (
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="login-field">
+                <label htmlFor="username" className="sr-only">Username</label>
                 <input
+                  id="username"
+                  className="login-input"
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  autoComplete="username"
+                  required
+                />
+              </div>
+              <div className="login-field">
+                <label htmlFor="password" className="sr-only">Password</label>
+                <input
+                  id="password"
                   className="login-input"
                   type="password"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                  required
                 />
+              </div>
+              {mode === 'signup' && role === 'employee' && (
+                <div className="login-field">
+                  <label htmlFor="confirmPassword" className="sr-only">Confirm Password</label>
+                  <input
+                    id="confirmPassword"
+                    className="login-input"
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="new-password"
+                    required
+                  />
+                </div>
               )}
-              <button type="submit" className="login-btn" disabled={loading}>
+              <button
+                type="submit"
+                className="login-btn"
+                disabled={loading}
+                aria-busy={loading}
+              >
                 {loading
                   ? 'Please wait...'
                   : mode === 'signup'
@@ -180,6 +206,7 @@ const LoginForm = ({ onLogin }) => {
             </form>
           </div>
         </div>
+
       </div>
     </div>
   );

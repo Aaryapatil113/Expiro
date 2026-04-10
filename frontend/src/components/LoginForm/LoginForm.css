@@ -390,3 +390,16 @@
     border-radius: 0 0 20px 20px;
   }
 }
+
+/* Role card as button — reset button styles, keep visual design */
+.role-card {
+  width: 100%;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-field {
+  margin-bottom: 0;
+}
