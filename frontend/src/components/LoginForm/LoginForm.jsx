@@ -123,9 +123,7 @@ const LoginForm = ({ onLogin }) => {
 
             {role === 'manager' && mode === 'signin' && (
               <div className="login-hint">
-                <p><strong>Demo credentials:</strong></p>
-                <p>Username: <code>admin</code></p>
-                <p>Password: <code>admin</code></p>
+                <p>Please use your assigned manager credentials to log in. Contact your system administrator if you need access.</p>
               </div>
             )}
 
