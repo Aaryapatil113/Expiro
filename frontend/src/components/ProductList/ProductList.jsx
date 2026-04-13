@@ -99,7 +99,7 @@ const ProductList = ({ products, loading, onEdit, onDelete, onAdd }) => {
               </p>
             </div>
             <button className="btn-add" onClick={onAdd}>
-              + Add Product
+              Add Product
             </button>
           </div>
           <div className="category-grid">
@@ -134,7 +134,7 @@ const ProductList = ({ products, loading, onEdit, onDelete, onAdd }) => {
               </div>
             </div>
             <button className="btn-add" onClick={onAdd}>
-              + Add Product
+              Add Product
             </button>
           </div>
           <div className="product-filters">

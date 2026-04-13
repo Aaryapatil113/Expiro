@@ -28,7 +28,7 @@ const WasteReportList = ({ reports, loading, onEdit, onDelete, onAdd }) => {
           </p>
         </div>
         <button className="btn-add" onClick={onAdd}>
-          + Log Waste
+          Log Waste
         </button>
       </div>
 
