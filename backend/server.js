@@ -20,9 +20,10 @@ app.use(express.json());
 // Manual CORS headers
 app.use((req, res, next) => {
   const allowedOrigins = [
-    "http://localhost:5173",
-    "https://expiro-three.vercel.app",
-    "https://expiro-857jdz019-aaryapatil113s-projects.vercel.app",
+    'http://localhost:5173',
+    'https://expiro-three.vercel.app',
+    'https://expiro-857jdz019-aaryapatil113s-projects.vercel.app',
+    'https://expiro-wine.vercel.app',
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
